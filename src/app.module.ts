@@ -1,3 +1,5 @@
+// AppModule.ts
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Winner } from './entities/winner.entity';
@@ -8,13 +10,13 @@ import { WinnerService } from './services/winner.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5434,
-      username: 'tick-tack',
-      password: 'tick-tack2024',
-      database: 'tick-tack-DB',
-      entities: [Winner], // Change this to just the entity class itself, not the file path
-      synchronize: true, // Make sure to set this to false in production
+      host: 'db', // <-- Use the service name defined in docker-compose.yml
+      port: 5432, // Default PostgreSQL port
+      username: 'myuser',
+      password: 'mypassword',
+      database: 'mydatabase',
+      entities: [Winner],
+      synchronize: true,
     }),
     TypeOrmModule.forFeature([Winner]),
   ],
